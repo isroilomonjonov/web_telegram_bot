@@ -6,12 +6,13 @@ import getData from "./constants/db";
 import { Data, CartData } from "./interface/index";
 const courses = getData();
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const telegram=(window as any)?.Telegram?.WebApp;
+const telegram = (window as any).Telegram.WebApp;
+console.log(telegram);
+
 function App() {
   const [cartItems, setCartItems] = useState<CartData[]>([]);
   useEffect(() => {
-    telegram.ready()
+    telegram.ready();
   });
   const onAddItem = (item: Data) => {
     const existItem = cartItems.find((c) => c.id === item.id);
@@ -45,14 +46,14 @@ function App() {
       }
     }
   };
-  const onCheckout=()=>{
-    telegram.MainButton.text="Sotib olish";
+  const onCheckout = () => {
+    telegram.MainButton.text = "Sotib olish";
     telegram.MainButton.show();
-  }
+  };
   return (
     <>
       <h1 className="heading">Sammi kurslar</h1>
-      <Cart cartItems={cartItems} onCheckout={onCheckout}/>
+      <Cart cartItems={cartItems} onCheckout={onCheckout} />
       <div className="cards__container">
         {courses.map((c) => (
           <Card
@@ -60,7 +61,6 @@ function App() {
             course={c}
             onAddItem={onAddItem}
             onRemoveItem={onRemoveItem}
-            
           />
         ))}
       </div>
