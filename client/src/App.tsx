@@ -8,6 +8,8 @@ const courses = getData();
 
 const telegram = (window as any).Telegram.WebApp;
 function App() {
+  console.log(telegram);
+
   const [cartItems, setCartItems] = useState<CartData[]>([]);
   useEffect(() => {
     telegram.ready();
@@ -50,13 +52,11 @@ function App() {
     telegram.MainButton.show();
   };
   const onSendData = useCallback(() => {
-    console.log("vaahhhaaaaa");
-    
-    telegram.sendData(JSON.stringify(cartItems));
+    return telegram.sendData(JSON.stringify(cartItems));
   }, [cartItems]);
   useEffect(() => {
     telegram.onEvent("mainButtonClicked", onSendData);
-    return telegram.offEvent("mainButtonClicked", onSendData);
+   return ()=>telegram.offEvent("mainButtonClicked", onSendData);
   }, [onSendData]);
   return (
     <>

@@ -26,15 +26,17 @@ const botStart = () => {
         }
       );
     }
+    console.log(msg.web_app_data?.data,"ddddddddddddddddddddddddd");
     if (msg.web_app_data?.data) {
       try {
+        console.log("aaaaaaaaaaaaaaaaa");
         const data = JSON.parse(msg.web_app_data.data);
-        await bot.sendMessage(chat_id, `Siz sotib olgan kurslar, `);
+        await bot.sendMessage(chatId, `Siz sotib olgan kurslar, `);
         for (item of data) {
-          await bot.sendMessage(chat_id, `${item.title}-${item.quantity}x`);
+          await bot.sendMessage(chatId, `${item.title}-${item.quantity}x`);
         }
-        await bot.sendMessage(
-          chat_id,
+       return await bot.sendMessage(
+          chatId,
           `Umumiy narx, ${data.reduce((a, c) => a + c.price * c.quantity, 0)} `
         );
       } catch (error) {
