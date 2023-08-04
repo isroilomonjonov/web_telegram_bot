@@ -41,7 +41,7 @@ const botStart = () => {
         }
       );
     }
-    if (text === "/courses") {
+    if (text === "/phones") {
       await bot.sendMessage(
         chatId,
         "Assalom Alekum Web Botimizga hush kelibsiz!",
@@ -83,6 +83,10 @@ const botStart = () => {
         console.log(error);
       }
     }
+    return await bot.sendMessage(
+      chatId,
+      `Noto'g'ri malumot jonatdingiz!`
+    );
   });
 };
 botStart();
