@@ -1,18 +1,22 @@
 const TelegramBot = require("node-telegram-bot-api");
 const token = "6385314171:AAHMK7frezBvR3_nOfTg7dV7WO5tkEF_CDI";
-
+const express=require("express");
+const cors=require("cors");
 const bot = new TelegramBot(token, { polling: true });
+const app=express()
+app.use(express.json())
+app.use(cors())
 const botStart = () => {
-    bot.setMyCommands([
-        {
-            command: "/start",
-            description: "Start"
-        },
-        {
-            command: "/courses",
-            description:"Courselar"
-        }
-    ])
+  bot.setMyCommands([
+    {
+      command: "/start",
+      description: "Start",
+    },
+    {
+      command: "/courses",
+      description: "Courselar",
+    },
+  ]);
   bot.on("message", async (msg) => {
     const chatId = msg.chat.id;
     const text = msg.text;
@@ -37,24 +41,24 @@ const botStart = () => {
       );
     }
     if (text === "/courses") {
-        await bot.sendMessage(
-            chatId,
-            "Assalom Alekum Web Botimizga hush kelibsiz!",
-            {
-              reply_markup: {
-                inline_keyboard: [
-                  [
-                    {
-                      text: "Kurslarni ko'rish",
-                      web_app: {
-                        url: "https://web-telegram-bot-xcmb.vercel.app/",
-                      },
-                    },
-                  ],
-                ],
-              },
-            }
-          );
+      await bot.sendMessage(
+        chatId,
+        "Assalom Alekum Web Botimizga hush kelibsiz!",
+        {
+          reply_markup: {
+            inline_keyboard: [
+              [
+                {
+                  text: "Kurslarni ko'rish",
+                  web_app: {
+                    url: "https://web-telegram-bot-xcmb.vercel.app/",
+                  },
+                },
+              ],
+            ],
+          },
+        }
+      );
     }
 
     if (msg.web_app_data?.data) {
@@ -81,3 +85,9 @@ const botStart = () => {
   });
 };
 botStart();
+app.post("/web-data",async(req,res)=>{
+
+})
+app.listen(process.env.PORT||8000,()=>{
+    console.log("server started");
+})
