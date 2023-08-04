@@ -52,11 +52,21 @@ function App() {
     telegram.MainButton.show();
   };
   const onSendData = useCallback(() => {
-    return telegram.sendData(JSON.stringify(cartItems));
-  }, [cartItems]);
+    const queryId = telegram.initDataUnsave?.query_id;
+    if(queryId) {
+      fetch("http://localhost:8000/web-data",{
+        method: "POST",
+        headers:{
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(cartItems)
+      })
+    }else{
+    telegram.sendData(JSON.stringify(cartItems));}
+   }, [cartItems]);
   useEffect(() => {
     telegram.onEvent("mainButtonClicked", onSendData);
-   return ()=>telegram.offEvent("mainButtonClicked", onSendData);
+    return () => telegram.offEvent("mainButtonClicked", onSendData);
   }, [onSendData]);
   return (
     <>
