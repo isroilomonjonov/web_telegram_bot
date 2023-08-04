@@ -47,6 +47,8 @@ function App() {
     }
   };
   const onCheckout = () => {
+    console.log(telegram.MainButton);
+    
     telegram.MainButton.text = "Sotib olish";
     telegram.MainButton.show();
   };
