@@ -37,7 +37,7 @@ export default function getData():Data[] {
 			id: 5,
 		},
 		{
-			title: 'Samsung Galaxy A73 5G',
+			title: 'Samsung Galaxy A73',
 			price: 400.99,
 			Image:
 				'https://images.samsung.com/is/image/samsung/p6pim/uz_uz/sm-a736bzadskz/gallery/uz-uz-galaxy-a73-5g-a736-sm-a736bzadskz-531866119?$650_519_PNG$',
