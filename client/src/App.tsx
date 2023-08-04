@@ -11,9 +11,11 @@ function App() {
 
   const [cartItems, setCartItems] = useState<CartData[]>([]);
   useEffect(() => {
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    
     console.log(telegram);
     telegram.ready();
-  });
+  },[]);
   const onAddItem = (item: Data) => {
     const existItem = cartItems.find((c) => c.id === item.id);
     console.log(existItem);
