@@ -6,8 +6,8 @@ import getData from "./constants/db";
 import { Data, CartData } from "./interface/index";
 const courses = getData();
 
+const telegram = (window as any).Telegram.WebApp;
 function App() {
-  const telegram = (window as any).Telegram.WebApp;
   const [cartItems, setCartItems] = useState<CartData[]>([]);
   useEffect(() => {
     telegram.ready();
@@ -47,7 +47,7 @@ function App() {
   };
   const onCheckout = () => {
     telegram.MainButton.text = "Sotib olish";
-    cartItems.length >= 1 ? telegram.MainButton.show() : null;
+    telegram.MainButton.show();
   };
   const onSendData = useCallback(() => {
     telegram.sendData(JSON.stringify(cartItems));
