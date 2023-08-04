@@ -5,11 +5,12 @@ import Cart from "./components/cart/cart";
 import getData from "./constants/db";
 import { Data, CartData } from "./interface/index";
 const courses = getData();
-const telegram=window?.Telegram?.WebApp;
+
+// const telegram=window?.Telegram?.WebApp;
 function App() {
   const [cartItems, setCartItems] = useState<CartData[]>([]);
   useEffect(() => {
-    telegram.ready()
+    // telegram.ready()
   });
   const onAddItem = (item: Data) => {
     const existItem = cartItems.find((c) => c.id === item.id);
@@ -44,8 +45,8 @@ function App() {
     }
   };
   const onCheckout=()=>{
-    telegram.MainButton.text="Sotib olish";
-    telegram.MainButton.show();
+    // telegram.MainButton.text="Sotib olish";
+    // telegram.MainButton.show();
   }
   return (
     <>
