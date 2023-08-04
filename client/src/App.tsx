@@ -70,7 +70,7 @@ function App() {
   }, [onSendData]);
   return (
     <>
-      <h1 className="heading">Sammi kurslar</h1>
+      <h1 className="heading">Phone Sale</h1>
       <Cart cartItems={cartItems} onCheckout={onCheckout} />
       <div className="cards__container">
         {courses.map((c) => (

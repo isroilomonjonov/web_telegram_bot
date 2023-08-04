@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const bot = new TelegramBot(token, { polling: true });
 const app = express();
+
 app.use(express.json());
 app.use(cors());
 const botStart = () => {
@@ -18,6 +19,7 @@ const botStart = () => {
     },
   ]);
   bot.on("message", async (msg) => {
+    
     const chatId = msg.chat.id;
     const text = msg.text;
     if (text === "/start") {
@@ -99,7 +101,7 @@ app.post("/web-data", async (req, res) => {
             style: "currency",
             currency: "USD",
           })} qiymatga ega mahsulot sotib oldingiz, ${products
-          .map((product) => `${c.title}-${c.quantity}x`)
+          .map((product) => `${product.title}-${product.quantity}x`)
           .join(", ")}`,
       },
     });
