@@ -50,6 +50,8 @@ function App() {
     telegram.MainButton.show();
   };
   const onSendData = useCallback(() => {
+    console.log("vaahhhaaaaa");
+    
     telegram.sendData(JSON.stringify(cartItems));
   }, [cartItems]);
   useEffect(() => {

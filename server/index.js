@@ -26,7 +26,7 @@ const botStart = () => {
         }
       );
     }
-    if (msg.web_app_data.data) {
+    if (msg.web_app_data?.data) {
       try {
         const data = JSON.parse(msg.web_app_data.data);
         await bot.sendMessage(chat_id, `Siz sotib olgan kurslar, `);
