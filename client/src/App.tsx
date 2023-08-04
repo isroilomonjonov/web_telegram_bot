@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./App.css";
 import Card from "./components/card/card";
 import Cart from "./components/cart/cart";
@@ -47,10 +47,15 @@ function App() {
   };
   const onCheckout = () => {
     telegram.MainButton.text = "Sotib olish";
-    {
-      cartItems.length >= 1 && telegram.MainButton.show();
-    }
+    cartItems.length >= 1 ? telegram.MainButton.show() : null;
   };
+  const onSendData = useCallback(() => {
+    telegram.sendData(JSON.stringify(cartItems));
+  }, [cartItems]);
+  useEffect(() => {
+    telegram.onEvent("mainButtonClicked", onSendData);
+    return telegram.offEvent("mainButtonClicked", onSendData);
+  }, [onSendData]);
   return (
     <>
       <h1 className="heading">Sammi kurslar</h1>
