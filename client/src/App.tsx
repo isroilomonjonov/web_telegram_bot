@@ -6,12 +6,12 @@ import getData from "./constants/db";
 import { Data, CartData } from "./interface/index";
 const courses = getData();
 
-const telegram = (window as any).Telegram.WebApp;
-console.log(telegram);
-
 function App() {
+  const telegram = (window as any).Telegram.WebApp;
+
   const [cartItems, setCartItems] = useState<CartData[]>([]);
   useEffect(() => {
+    console.log(telegram);
     telegram.ready();
   });
   const onAddItem = (item: Data) => {
