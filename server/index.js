@@ -14,12 +14,11 @@ const botStart = () => {
       description: "Start",
     },
     {
-      command: "/courses",
-      description: "Courselar",
+      command: "/phones",
+      description: "Telefonlar",
     },
   ]);
   bot.on("message", async (msg) => {
-    
     const chatId = msg.chat.id;
     const text = msg.text;
     if (text === "/start") {
@@ -31,7 +30,7 @@ const botStart = () => {
             keyboard: [
               [
                 {
-                  text: "Kurslarni ko'rish",
+                  text: "Telafonlarni ko'rish",
                   web_app: {
                     url: "https://web-telegram-bot-xcmb.vercel.app/",
                   },
@@ -51,7 +50,7 @@ const botStart = () => {
             inline_keyboard: [
               [
                 {
-                  text: "Kurslarni ko'rish",
+                  text: "Telefonlarni ko'rish",
                   web_app: {
                     url: "https://web-telegram-bot-xcmb.vercel.app/",
                   },
@@ -66,7 +65,7 @@ const botStart = () => {
     if (msg.web_app_data?.data) {
       try {
         const data = JSON.parse(msg.web_app_data.data);
-        await bot.sendMessage(chatId, `Siz sotib olgan kurslar, `);
+        await bot.sendMessage(chatId, `Siz sotib olgan telefonlar, `);
         for (item of data) {
           await bot.sendPhoto(chatId, item.Image);
           await bot.sendMessage(chatId, `${item.title}-${item.quantity}x`);
