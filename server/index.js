@@ -1,11 +1,11 @@
 const TelegramBot = require("node-telegram-bot-api");
 const token = "6385314171:AAHMK7frezBvR3_nOfTg7dV7WO5tkEF_CDI";
-const express=require("express");
-const cors=require("cors");
+const express = require("express");
+const cors = require("cors");
 const bot = new TelegramBot(token, { polling: true });
-const app=express()
-app.use(express.json())
-app.use(cors())
+const app = express();
+app.use(express.json());
+app.use(cors());
 const botStart = () => {
   bot.setMyCommands([
     {
@@ -85,27 +85,29 @@ const botStart = () => {
   });
 };
 botStart();
-app.post("/web-data",async(req,res)=>{
- const {queryId,products}=req.body;
- try {
-    await bot.answerWebAppQuery(queryId,{
-        type: "article",
-        id:queryId,
-        title:"Muvaffaqiyatli xarid qildingiz",
-        input_message_content:{
-            message_text:`Xaridingiz bilan tabriklayman siz ${products
-                .reduce((a, c) => a + c.price * c.quantity, 0)
-                .toLocaleString("en-US", {
-                  style: "currency",
-                  currency: "USD",
-                })} qiymatga ega mahsulot sotib oldingiz, ${products.map((product) =>`${c.title}-${c.quantity}x`).join(', ')}`
-        }
-    })
-    return res.status(200).json({})
- } catch (error) {
-    return res.status(500).json({})
- }
-})
-app.listen(process.env.PORT||8000,()=>{
-    console.log("server started");
-})
+app.post("/web-data", async (req, res) => {
+  const { queryId, products } = req.body;
+  try {
+    await bot.answerWebAppQuery(queryId, {
+      type: "article",
+      id: queryId,
+      title: "Muvaffaqiyatli xarid qildingiz",
+      input_message_content: {
+        message_text: `Xaridingiz bilan tabriklayman siz ${products
+          .reduce((a, c) => a + c.price * c.quantity, 0)
+          .toLocaleString("en-US", {
+            style: "currency",
+            currency: "USD",
+          })} qiymatga ega mahsulot sotib oldingiz, ${products
+          .map((product) => `${c.title}-${c.quantity}x`)
+          .join(", ")}`,
+      },
+    });
+    return res.status(200).json({});
+  } catch (error) {
+    return res.status(500).json({});
+  }
+});
+app.listen(process.env.PORT || 8000, () => {
+  console.log("server started");
+});
