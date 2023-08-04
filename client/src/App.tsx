@@ -52,7 +52,7 @@ function App() {
     telegram.MainButton.show();
   };
   const onSendData = useCallback(() => {
-    const queryId = telegram.initDataUnsave?.query_id;
+    const queryId = telegram.initDataUnsafe?.query_id;
     if(queryId) {
       fetch("https://isroilwebtelegrambot-ac3749729c77.herokuapp.com/web-data",{
         method: "POST",
