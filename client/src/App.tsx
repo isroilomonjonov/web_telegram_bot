@@ -8,18 +8,12 @@ const courses = getData();
 
 function App() {
   const telegram = (window as any).Telegram.WebApp;
-
   const [cartItems, setCartItems] = useState<CartData[]>([]);
   useEffect(() => {
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-    
-    console.log(telegram);
     telegram.ready();
-  },[]);
+  }, []);
   const onAddItem = (item: Data) => {
     const existItem = cartItems.find((c) => c.id === item.id);
-    console.log(existItem);
-
     if (existItem) {
       const newData = cartItems.map((c) =>
         c.id === item.id
@@ -49,10 +43,10 @@ function App() {
     }
   };
   const onCheckout = () => {
-    console.log("aaaaaaaaaaaaaaaaaaaaaa");
-    console.log(telegram.MainButton);
     telegram.MainButton.text = "Sotib olish";
-    telegram.MainButton.show();
+    {
+      cartItems.length >= 1 && telegram.MainButton.show();
+    }
   };
   return (
     <>

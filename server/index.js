@@ -13,7 +13,7 @@ const botStart=()=>{
                         {
                             text:"Kurslarni ko'rish",
                             web_app:{
-                                url:"https://web-telegram-qb2qntwu5-isroilomonjonov.vercel.app/"
+                                url:"https://web-telegram-bot-xcmb.vercel.app/"
                             }
                         }
                     ]
