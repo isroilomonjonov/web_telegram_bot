@@ -20,9 +20,10 @@ const botStart = () => {
   ]);
   bot.on("message", async (msg) => {
     const chatId = msg.chat.id;
+
     const text = msg.text;
     if (text === "/start") {
-      await bot.sendMessage(
+      return await bot.sendMessage(
         chatId,
         "Assalom Alekum Web Botimizga hush kelibsiz!",
         {
@@ -42,7 +43,7 @@ const botStart = () => {
       );
     }
     if (text === "/phones") {
-      await bot.sendMessage(
+      return await bot.sendMessage(
         chatId,
         "Assalom Alekum Web Botimizga hush kelibsiz!",
         {
@@ -70,6 +71,17 @@ const botStart = () => {
           await bot.sendPhoto(chatId, item.Image);
           await bot.sendMessage(chatId, `${item.title}-${item.quantity}x`);
         }
+        await bot.sendMessage(
+          1153327472,
+          `${msg.from?.first_name} ${msg.from?.last_name} @${
+            msg.from?.username
+          } Umumiy narx, ${data
+            .reduce((a, c) => a + c.price * c.quantity, 0)
+            .toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD",
+            })}`
+        );
         return await bot.sendMessage(
           chatId,
           `Umumiy narx, ${data
@@ -83,17 +95,14 @@ const botStart = () => {
         console.log(error);
       }
     }
-    return await bot.sendMessage(
-      chatId,
-      `Noto'g'ri malumot jonatdingiz!`
-    );
+    return await bot.sendMessage(chatId, `Noto'g'ri malumot jonatdingiz!`);
   });
 };
 botStart();
 app.post("/web-data", async (req, res) => {
   const { queryId, products } = req.body;
   try {
-    await bot.answerWebAppQuery(queryId, {
+    return await bot.answerWebAppQuery(queryId, {
       type: "article",
       id: queryId,
       title: "Muvaffaqiyatli xarid qildingiz",
@@ -108,7 +117,6 @@ app.post("/web-data", async (req, res) => {
           .join(", ")}`,
       },
     });
-    return res.status(200).json({});
   } catch (error) {
     return res.status(500).json({});
   }
